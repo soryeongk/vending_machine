@@ -12,10 +12,12 @@ def run(raw):
 
     if cmd == '잔액':
         return '잔액은 {}원입니다'.format(change)
-    else:
+    elif cmd == '동전':
         coin = params[0]
         change += int(coin)
         return coin + '원을 넣었습니다'
+    else:
+        return '알 수 없는 명령입니다'
 
 # def vm(vm_dict):
 #     coin = int(input('동전을 넣어주세요: '))

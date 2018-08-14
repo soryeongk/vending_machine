@@ -15,3 +15,7 @@ def test_accumulation_of_change():
 def test_initial_change_should_be_zero():
     init()
     assert '잔액은 0원입니다' == run('잔액')
+
+def test_unknown_cmd():
+    init()
+    assert '알 수 없는 명령입니다' == run('blah')
