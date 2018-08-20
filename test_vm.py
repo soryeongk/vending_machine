@@ -23,3 +23,15 @@ def test_initial_change_should_be_zero():
 def test_unknown_cmd():
     m = VendingMachine()
     assert '알 수 없는 명령입니다' == m.run('blah')
+
+def test_give_me_coffee():
+    m = VendingMachine()
+    m.run('동전 500')
+    assert '커피가 나왔습니다' == m.run('음료 커피')
+    assert '잔액은 350원입니다' == m.run('잔액')
+
+def test_unknown_drink():
+    m = VendingMachine()
+    m.run('동전 500')
+    assert '알 수 없는 음료입니다' == m.run('음료 맥주')
+    assert '잔액은 500원입니다' == m.run('잔액')

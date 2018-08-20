@@ -1,6 +1,4 @@
-
-
-class VendingMachine:
+class VendingMachine:  # 상태와 연산을 정의
     def __init__(self):
         self.change = 0
 
@@ -14,6 +12,15 @@ class VendingMachine:
             coin = params[0]
             self.change += int(coin)
             return coin + '원을 넣었습니다'
+        elif cmd == '음료':
+            price = 150
+            drink = params[0]
+            if drink != '커피':
+                return '알 수 없는 음료입니다'
+            if self.change < price:
+                return '잔액이 부족합니다'
+            self.change -= price
+            return drink + '가 나왔습니다'
         else:
             return '알 수 없는 명령입니다'
 
@@ -24,7 +31,7 @@ class VendingMachine:
 #     while coin >= price:
 #         coin = coin - price
 #         print('선택하신 음료 \'{0}\'가 나왔습니다. 잔액은 {1}원입니다.'.format(drink, coin))
-#         # print('_---@---_\n|  coca   |\n|            |\n---------```')
+
 #         if coin >= min(vm_dict.values()):
 #             more_drink = input('음료를 더 선택하시려면 아무키나 누르세요(No = [Enter])')
 #             if more_drink != '':
