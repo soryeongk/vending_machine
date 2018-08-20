@@ -10,6 +10,8 @@ class VendingMachine:  # 상태와 연산을 정의
             return '잔액은 {}원입니다'.format(self.change)
         elif cmd == '동전':
             coin = params[0]
+            if int(coin) not in [10, 50, 100, 500]:
+                return '알 수 없는 동전입니다'
             self.change += int(coin)
             return coin + '원을 넣었습니다'
         elif cmd == '음료':
@@ -21,6 +23,16 @@ class VendingMachine:  # 상태와 연산을 정의
                 return '잔액이 부족합니다'
             self.change -= price
             return drink + '가 나왔습니다'
+        elif cmd == '반환':
+            c_500 = self.change//500
+            self.change = self.change % 500
+            c_100 = self.change//100
+            self.change = self.change % 100
+            c_50 = self.change//50
+            self.change = self.change % 50
+            c_10 = self.change//10
+            self.change = self.change % 10
+            return '500원 '*c_500 + '100원 '*c_100 + '50원 '*c_50 + '10원 '*c_10
         else:
             return '알 수 없는 명령입니다'
 
