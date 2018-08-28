@@ -42,12 +42,12 @@ def test_unknown_coins():
     m = VendingMachine()
     assert '알 수 없는 동전입니다' == m.run('동전 130')
     assert '잔액은 0원입니다' == m.run('잔액')
-#
-# def test_return_change():
-#     m = VendingMachine()
-#     m.run('동전 500'); m.run('동전 100'); m.run('동전 50')
-#     m.run('동전 10'); m.run('동전 10')
-#     assert '500원 100원 50원 10원 10원 ' == m.run('반환')
+
+def test_return_coins():
+    m = VendingMachine()
+    m.run('동전 500'); m.run('동전 100')
+    m.run('동전 10'); m.run('동전 10')
+    assert '동전 500동전 100동전 10동전 10' == m.run('반환')
 
 def test_milk_coffee():
     m = VendingMachine()

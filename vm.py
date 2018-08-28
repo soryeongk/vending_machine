@@ -1,6 +1,7 @@
 class VendingMachine:  # 상태와 연산을 정의
     def __init__(self):
         self.change = 0
+        self.vaild_coins = [500, 100, 50, 10]
 
     def run(self, raw):
         tokens = raw.split(' ')
@@ -10,7 +11,7 @@ class VendingMachine:  # 상태와 연산을 정의
             return '잔액은 {}원입니다'.format(self.change)
         elif cmd == '동전':
             coin = params[0]
-            if int(coin) not in [10, 50, 100, 500]:
+            if int(coin) not in self.vaild_coins:
                 return '알 수 없는 동전입니다'
             self.change += int(coin)
             return coin + '원을 넣었습니다'
@@ -30,6 +31,33 @@ class VendingMachine:  # 상태와 연산을 정의
 
             self.change -= price
             return drink + '가 나왔습니다'
+
+        elif cmd == '반환':
+            won_500 = 0; won_100 = 0; won_50 = 0; won_10 = 0
+
+            coin_counts = {
+                500 : won_500,
+                100 : won_100,
+                50 : won_50,
+                10 : won_10,
+            }
+
+            for k in coin_counts.keys():
+                coin_counts[k] += self.change // k
+                self.change %= k
+
+            # won_500 = self.change // 500
+            # self.change %= 500
+            # won_100 = self.change // 100
+            # self.change %= 100
+            # won_50 = self.change // 50
+            # self.change %= 50
+            # won_10 = self.change // 10
+            # self.change %= 10
+            answer = ''
+            for k, v in coin_counts.items():
+                answer += ('동전 ' + str(k))*v
+            return answer
 
         else:
             return '알 수 없는 명령입니다'
